@@ -18,6 +18,9 @@
         <% if @book %>
           <%= render 'layouts/errors', obj: @book %>
         <% end %>
+        <% if @book_comment %>
+          <%= render 'layouts/errors', obj: @book_comment %>
+        <% end %>
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>
