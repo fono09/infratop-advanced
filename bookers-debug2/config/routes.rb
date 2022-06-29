@@ -4,6 +4,13 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :users, only: [:index, :show, :edit, :update]
+  resources :users do
+    resource :relationship, only: [:create, :destroy]
+    member do
+      get :followers
+      get :follows
+    end
+  end
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update]
   resources :books do

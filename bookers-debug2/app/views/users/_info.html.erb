@@ -12,10 +12,33 @@
 	  <th>comments</th>
 	  <th><%= user.book_comments.count %></th>
   </tr>
+  <tr>
+	  <th>follows</th>
+    <th>
+      <%= link_to follows_user_path(user.id) do %>
+        <%= user.follow_ids.count %>
+      <% end %>
+    </th>
+  </tr>
+  <tr>
+	  <th>followers</th>
+    <th>
+      <%= link_to followers_user_path(user.id) do %>
+        <%= user.follower_ids.count %>
+      <% end %>
+    </th>
+  </tr>
 </table>
 　
 <div class='row'>
   <%= link_to edit_user_path(user.id), class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" do %>
     <i class="fas fa-user-cog"></i>
+  <% end %>
+  <% if user.id != current_user.id %>
+     <% if current_user.follows?(user.id) %>
+       <%= link_to "フォロー外す", user_relationship_path(user_id: user.id), method: :delete, class: "btn btn-info" %>
+     <% else %>
+        <%= link_to "フォローする", user_relationship_path(user_id: user.id), method: :post, class: "btn btn-success" %>
+      <% end %>
   <% end %>
 </div>
