@@ -12,6 +12,10 @@ class SearchesController < ApplicationController
       view_label: 'users',
       column: 'name',
     },
+    Tag: {
+      name: 'Tag',
+      view_label: 'tags',
+    }
   }
 
   SEARCH_TYPES = {
@@ -41,6 +45,11 @@ class SearchesController < ApplicationController
     render status: 400 unless SEARCH_MODELS.has_key?(target_model.to_sym)
     render status: 400 unless SEARCH_TYPES.has_key?(search_type.to_sym)
 
+    if target_model == SEARCH_MODELS[:Tag][:name]
+      redirect_to books_path(tag_name: keyword)
+      return
+    end
+
     case search_type
       when SEARCH_TYPES[:Prefix][:name]
         keyword = "#{keyword}%"
@@ -57,6 +66,5 @@ class SearchesController < ApplicationController
       ].matches(keyword)
     )
     @target_model = target_model
-    logger.debug([@objs, @target_model])
   end
 end

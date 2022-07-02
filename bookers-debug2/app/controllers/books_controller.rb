@@ -11,6 +11,11 @@ class BooksController < ApplicationController
   end
 
   def index
+    if params["tag_name"]
+      @books = Book.joins(:tag).where('tag.tag_name'=> params["tag_name"])
+      return
+    end
+
     if ORDER_BY_PERMIT.include?(params["order_by"])
       @books = Book.all.order(params["order_by"].to_sym => :desc)
     else
@@ -51,7 +56,7 @@ class BooksController < ApplicationController
   private
 
   def book_params
-    params.require(:book).permit(:title, :body, :rating)
+    params.require(:book).permit(:title, :body, :rating, :tag_name)
   end
 
   def ensure_correct_user

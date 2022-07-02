@@ -7,6 +7,7 @@
       <th>Favorites</th>
       <th>Comments</th>
       <th>Rating</th>
+      <th>Tag</th>
     </tr>
   </thead>
   <tbody>
@@ -23,6 +24,7 @@
         </td>
         <td><%= book.book_comments.count %></td>
         <td><%= render 'books/rating', book: book %></td>
+        <td><%= link_to books_path(tag_name: book.tag_name) do %><%= book.tag_name %><% end %></td>
       </tr>
     <% end %>
   </tbody>
