@@ -2,12 +2,20 @@ class BooksController < ApplicationController
   before_action :authenticate_user!, only: [:show, :index, :edit]
   before_action :ensure_correct_user, only: [:edit]
 
+  ORDER_BY_CREATED_AT = 'created_at'
+  ORDER_BY_RATING = 'rating'
+  ORDER_BY_PERMIT = [ORDER_BY_CREATED_AT, ORDER_BY_RATING]
+
   def show
     @book = Book.find(params[:id])
   end
 
   def index
-    @books = Book.all
+    if ORDER_BY_PERMIT.include?(params["order_by"])
+      @books = Book.all.order(params["order_by"].to_sym => :desc)
+    else
+      @books = Book.all.order(created_at: :desc)
+    end
   end
 
   def create
