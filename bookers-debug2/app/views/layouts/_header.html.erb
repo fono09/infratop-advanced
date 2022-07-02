@@ -9,6 +9,14 @@
         <ul class="navbar-nav ml-auto">
         <% if user_signed_in? %>
           <li>
+            <%= form_with url: search_path, method: :get do |f|%>
+              <%= f.text_field :keyword %>
+              <%= f.select :target_model, SearchesController::SEARCH_MODELS.values.map{|v| [v[:view_label], v[:name]]} %>
+              <%= f.select :search_type, SearchesController::SEARCH_TYPES.values.map{|v| [v[:view_label], v[:name]]} %>
+              <%= f.submit '検索' %>
+            <% end %>
+          </li>
+          <li>
             <%= link_to user_path(current_user),class: 'nav-link text-light' do %>
               <i class="fas fa-home"></i> home
             <% end %>

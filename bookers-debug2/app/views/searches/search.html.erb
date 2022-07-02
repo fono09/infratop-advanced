@@ -1,0 +1,21 @@
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+      <%= render 'users/info', user: current_user %>
+      <h2 class="mt-3">New book</h2>
+      <%= render 'books/form' %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+      <h2>検索結果: <%= SearchesController::SEARCH_MODELS[@target_model.to_sym][:view_label] %></h2>
+      <% case @target_model %>
+      <% when SearchesController::SEARCH_MODELS[:Book][:name] %>
+        <%= render 'books/index', books: @objs %>
+      <% when SearchesController::SEARCH_MODELS[:User][:name] %>
+        <%= render 'users/index', users: @objs %>
+      <% else %>
+        <div class="callout-info">検索機能に何らかの問題があります。</div>
+      <% end %>
+    </div>
+  </div>
+</div>

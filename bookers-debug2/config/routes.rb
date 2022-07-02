@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get :follows
     end
   end
+  get '/search' => "searches#search"
 
   resources :books, only: [:index,:show,:edit,:create,:destroy,:update]
   resources :books do
