@@ -3,13 +3,15 @@ class BookCommentsController < ApplicationController
 
   def create
     params = book_comment_params.merge(user_id: current_user.id)
-    @book_comment = BookComment.new(params).save
-    redirect_to request.referer
+    book_comment = BookComment.new(params)
+    book_comment.save
+    @book = book_comment.book
   end
 
   def destroy
-    BookComment.find(params[:id]).destroy
-    redirect_to request.referer
+    book_comment = BookComment.find(params[:id])
+    @book = book_comment.book
+    book_comment.destroy
   end
 
   private 
