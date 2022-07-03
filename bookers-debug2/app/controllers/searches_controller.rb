@@ -5,36 +5,36 @@ class SearchesController < ApplicationController
     Book: {
       name: 'Book',
       view_label: 'books',
-      column: 'title',
+      column: 'title'
     },
     User: {
       name: 'User',
       view_label: 'users',
-      column: 'name',
+      column: 'name'
     },
     Tag: {
       name: 'Tag',
-      view_label: 'tags',
+      view_label: 'tags'
     }
   }
 
   SEARCH_TYPES = {
     Exact: {
       name: 'Exact',
-      view_label: '完全一致',
+      view_label: '完全一致'
     },
     Prefix: {
       name: 'Prefix',
-      view_label: '前方一致',
+      view_label: '前方一致'
     },
     Suffix: {
       name: 'Suffix',
-      view_label: '後方一致',
+      view_label: '後方一致'
     },
     Contains: {
       name: 'Contains',
-      view_label: '部分一致',
-    },
+      view_label: '部分一致'
+    }
   }
 
   def search
@@ -51,14 +51,13 @@ class SearchesController < ApplicationController
     end
 
     case search_type
-      when SEARCH_TYPES[:Prefix][:name]
-        keyword = "#{keyword}%"
-      when SEARCH_TYPES[:Suffix][:name]
-        keyword = "%#{keyword}"
-      when SEARCH_TYPES[:Contains][:name]
-        keyword = "%#{keyword}%"
+    when SEARCH_TYPES[:Prefix][:name]
+      keyword = "#{keyword}%"
+    when SEARCH_TYPES[:Suffix][:name]
+      keyword = "%#{keyword}"
+    when SEARCH_TYPES[:Contains][:name]
+      keyword = "%#{keyword}%"
     end
-
 
     @objs = target_model.constantize.where(
       target_model.constantize.arel_table[

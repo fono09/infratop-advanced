@@ -10,11 +10,10 @@ class RelationshipsController < ApplicationController
   end
 
   def destroy
-      Relationship.find_by(
-        followed_id: params[:user_id],
-        follower_id: current_user.id
-      ).destroy
+    Relationship.find_by(
+      followed_id: params[:user_id],
+      follower_id: current_user.id
+    ).destroy
     redirect_to request.referer
   end
-
 end

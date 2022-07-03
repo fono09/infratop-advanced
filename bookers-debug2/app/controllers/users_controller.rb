@@ -27,10 +27,10 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user), notice: "You have updated user successfully."
+      redirect_to user_path(@user), notice: 'You have updated user successfully.'
     else
       @book = Book.new
-      render "edit"
+      render 'edit'
     end
   end
 
@@ -42,8 +42,6 @@ class UsersController < ApplicationController
 
   def ensure_correct_user
     @user = User.find(params[:id])
-    unless @user == current_user
-      redirect_to user_path(current_user)
-    end
+    redirect_to user_path(current_user) unless @user == current_user
   end
 end
