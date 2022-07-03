@@ -1,5 +1,5 @@
 class RelationshipsController < ApplicationController
-  before :authenticate_user!
+  before_action :authenticate_user!
 
   def create
     Relationship.new(
