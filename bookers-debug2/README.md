@@ -1,24 +1,12 @@
-# README
+# bookers
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## dependency
+* Ruby 2.6.3
+* Rails 6.1.4
+* jQuery 3.6.0
 
-Things you may want to cover:
+## database initialization
+`rails db:migrate`
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## testing
+`rspec`

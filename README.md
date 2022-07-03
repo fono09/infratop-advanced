@@ -4,4 +4,8 @@
 
 ## 復習編
 
-./bookers-debug に配置
+`./bookers-debug1` に配置
+
+## 応用編
+
+`./bookers-debug2` に配置
